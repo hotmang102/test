@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0612"><title>Chubby Heo Way • Dashboard</title>
+<style>
+:root{--bg:#0a0612;--cd:rgba(255,255,255,.06);--bd:rgba(255,255,255,.12);--tx:#f6effd;--mu:#a99ec4;--p:#ff6b9d;--v:#8b5cf6;--ok:#57f287;--er:#ff5470;--g:linear-gradient(135deg,#ff6b9d,#8b5cf6)}
+*{box-sizing:border-box}html{color-scheme:dark}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(620px 420px at 8% 0,rgba(255,107,157,.30),transparent),radial-gradient(720px 520px at 100% 18%,rgba(139,92,246,.30),transparent),radial-gradient(620px 520px at 40% 105%,rgba(56,189,248,.16),transparent)}
+a{color:inherit;text-decoration:none}h1,h2,h3{margin:0}h3{font-size:15px;margin-bottom:10px}
+.card,.side{background:var(--cd);border:1px solid var(--bd);border-radius:18px;padding:16px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.btn{display:inline-block;border:0;border-radius:12px;padding:10px 16px;font:600 14px inherit;color:#fff;background:var(--g);cursor:pointer;box-shadow:0 6px 22px rgba(255,107,157,.28);transition:.15s}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}.btn:disabled{opacity:.5}
+.btn.ghost{background:rgba(255,255,255,.08);box-shadow:none;border:1px solid var(--bd)}.btn.red{background:linear-gradient(135deg,#ff5470,#c026d3)}.btn.s{padding:6px 11px;font-size:12px;border-radius:9px}
+label{display:block;font-size:12px;color:var(--mu);margin:0 0 9px}
+input,select,textarea{width:100%;margin-top:4px;padding:10px 12px;border-radius:11px;border:1px solid var(--bd);background:rgba(0,0,0,.32);color:var(--tx);font:inherit;outline:0}
+input:focus,select:focus,textarea:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(255,107,157,.18)}
+input[type=checkbox]{width:auto;margin:0 8px 0 0;accent-color:var(--p);transform:scale(1.2)}input[type=color]{height:42px;padding:3px}
+.ck{display:flex;align-items:center;color:var(--tx);font-size:13px}option{background:#150d24}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:14px}
+.app{display:grid;grid-template-columns:250px 1fr;gap:16px;max-width:1280px;margin:0 auto;padding:16px}
+.side{position:sticky;top:16px;align-self:start}.gh{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.ico{width:42px;height:42px;border-radius:13px;background:var(--g);display:grid;place-items:center;font-size:20px;flex:none;overflow:hidden}.ico img{width:100%;height:100%}
+.nav a{display:flex;gap:10px;padding:10px 12px;border-radius:12px;color:var(--mu);font-weight:600;white-space:nowrap}
+.nav a:hover{background:rgba(255,255,255,.06);color:var(--tx)}.nav a.on{background:var(--g);color:#fff}
+.me{display:flex;gap:8px;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--bd);font-size:13px}.me img{width:30px;height:30px;border-radius:50%}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:14px}
+.tile{padding:14px;border-radius:16px;background:var(--cd);border:1px solid var(--bd)}.tile b{display:block;font-size:24px;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}.tile span{color:var(--mu);font-size:12px}
+.hero{min-height:100vh;display:grid;place-items:center;padding:20px}.hero .card{max-width:440px;text-align:center;padding:34px 26px}
+.hero h1{font-size:28px;margin:14px 0 6px;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--mu);margin:0 0 22px}.hero .btn{display:block;margin:10px 0}
+.logo{width:76px;height:76px;margin:auto;border-radius:24px;background:var(--g);display:grid;place-items:center;font-size:38px;box-shadow:0 10px 40px rgba(255,107,157,.4)}
+.row{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bd);font-size:13px;word-break:break-word}.row:last-child{border:0}
+.row .t{color:var(--mu);font-size:11px;white-space:nowrap}.bd{padding:2px 9px;border-radius:99px;font-size:11px;font-weight:700;background:rgba(87,242,135,.16);color:var(--ok)}.bd.x{background:rgba(255,84,112,.16);color:var(--er)}
+.sw{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd);font-size:13px}.sw input:not([type=checkbox]),.sw select{width:150px;margin:0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.term{background:#05020a;border:1px solid var(--bd);border-radius:14px;padding:12px;height:300px;overflow:auto;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace}.term .e{color:var(--er)}.term .o{color:var(--ok)}.term .c{color:var(--p)}
+.toasts{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));display:grid;gap:8px;z-index:9;max-width:calc(100vw - 28px)}
+.toast{padding:12px 16px;border-radius:14px;background:#1b1230;border:1px solid var(--ok);box-shadow:0 10px 30px rgba(0,0,0,.5);animation:in .25s}.toast.bad{border-color:var(--er)}.toast a{color:var(--p);font-weight:700}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+@media(max-width:860px){.app{grid-template-columns:1fr;padding:10px}.side{position:static;padding:12px}.nav{display:flex;overflow-x:auto;gap:4px}.me{display:none}}
+</style></head><body><div class="bg"></div><div id="root"></div><div class="toasts" id="toasts"></div>
+<script>
+// ===== CẤU HÌNH: dán link HTTPS công khai của bot (để trống = nhập ngay trên trang) =====
+const API_BASE="";
+// =======================================================================================
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let API=(API_BASE||localStorage.api||'').replace(/\/+$/,''),S={me:null,gid:null,tab:'home',ov:null};
+const toast=(m,bad,url)=>{const d=document.createElement('div');d.className='toast'+(bad?' bad':'');d.innerHTML=esc(m)+(url?` <a href="${esc(url)}" target=_blank rel=noopener>mở ↗</a>`:'');$('#toasts').append(d);setTimeout(()=>d.remove(),5500)};
+async function api(p,body){const h={};if(localStorage.tok)h.Authorization='Bearer '+localStorage.tok;if(body)h['Content-Type']='application/json';let r;
+ try{r=await fetch(API+p,{method:body?'POST':'GET',headers:h,body:body?JSON.stringify(body):undefined})}catch(e){throw Error('Không kết nối được bot. Kiểm tra link HTTPS ('+API+') và bot đang chạy.')}
+ const j=await r.json().catch(()=>({ok:false,error:'Phản hồi không hợp lệ từ bot'}));
+ if(r.status===401&&p!=='/api/auth/ticket'){localStorage.removeItem('tok');S.me=null;render()}
+ if(!j.ok)throw Error(j.error||'Có lỗi xảy ra');return j}
+const act=d=>api(`/api/guild/${S.gid}/do`,d),data=n=>api(`/api/guild/${S.gid}/data/${n}`);
+const up=s=>s>86400?Math.floor(s/86400)+'d '+Math.floor(s%86400/3600)+'h':Math.floor(s/3600)+'h '+Math.floor(s%3600/60)+'m';
+const dt=t=>new Date(t*1000).toLocaleString('vi-VN');
+
+/* ---------- form builder ---------- */
+const U=(n,l)=>({n,l,t:'u'}),T=(n,l,x={})=>({n,l,t:'t',...x}),A=(n,l)=>({n,l,t:'a'}),N=(n,l,v)=>({n,l,t:'n',v}),B=(n,l,v)=>({n,l,t:'b',v}),K=(n,l)=>({n,l,t:'k'}),SE=(n,l,o)=>({n,l,t:'s',o}),CH=(n,l,k='t',opt)=>({n,l,t:'c',k,opt}),RL=(n,l)=>({n,l,t:'r'});
+const chOpts=k=>S.ov.channels.filter(c=>k==='x'||(k==='v')===(c.type==='voice')).map(c=>`<option value="${c.id}">${c.type==='voice'?'🔊':'#'} ${esc(c.name)}</option>`).join('');
+const FT={u:f=>`<input name=${f.n} data-u=1 placeholder="@tên hoặc ID" autocomplete=off>`,t:f=>`<input name=${f.n} placeholder="${esc(f.p||'')}" value="${esc(f.v||'')}">`,a:f=>`<textarea name=${f.n} rows=4 maxlength=2000></textarea>`,
+ n:f=>`<input name=${f.n} type=number value="${f.v??''}" min=0>`,b:f=>`<input name=${f.n} type=checkbox ${f.v?'checked':''}>`,k:f=>`<input name=${f.n} type=color value="#ff6b9d">`,
+ s:f=>`<select name=${f.n}>${f.o.map(o=>`<option value="${o[0]}">${esc(o[1])}</option>`).join('')}</select>`,c:f=>`<select name=${f.n}>${f.opt?'<option value="">— không chọn —</option>':''}${chOpts(f.k)}</select>`,
+ r:f=>`<select name=${f.n}>${S.ov.roles.map(r=>`<option value=${r.id}>${esc(r.name)}</option>`).join('')}</select>`};
+const row=f=>f.t==='b'?`<label class=ck>${FT.b(f)} ${esc(f.l)}</label>`:`<label>${esc(f.l)}${FT[f.t](f)}</label>`;
+const card=(title,act,fields,btn='Thực hiện',x={})=>`<form class=card data-act="${act}" data-x='${esc(JSON.stringify(x))}'><h3>${title}</h3>${fields.map(row).join('')}<button class=btn>${btn}</button></form>`;
+const list=(title,rows,empty='Chưa có dữ liệu')=>`<div class=card><h3>${title}</h3>${rows.length?rows.join(''):`<div class=row><span class=t>${empty}</span></div>`}</div>`;
+async function uid(v){v=v.trim();if(/^\d{15,25}$/.test(v))return v;const j=await api(`/api/guild/${S.gid}/members?q=${encodeURIComponent(v)}`);if(!j.members.length)throw Error(`Không tìm thấy thành viên "${v}"`);return j.members[0].id}
+document.addEventListener('submit',async e=>{const f=e.target.closest('form[data-act]');if(!f)return;e.preventDefault();const b=f.querySelector('button');b.disabled=1;
+ try{const d={action:f.dataset.act,...JSON.parse(f.dataset.x||'{}')};
+  for(const el of f.elements){if(!el.name)continue;let v=el.type==='checkbox'?el.checked:el.type==='number'?(el.value===''?undefined:+el.value):el.value;if(el.dataset.u&&v)v=await uid(v);d[el.name]=v}
+  const j=await act(d);toast(j.message||'Xong',0,j.url);if(j.keys)alert('Key mới:\n'+j.keys.join('\n'));if(['partner','keys','log','welcome'].includes(S.tab))render()}
+ catch(err){toast(err.message,1)}b.disabled=0});
+
+/* ---------- màn hình ---------- */
+const logo='<div class=logo>🐷</div>';
+const connectView=()=>`<div class=hero><form class=card onsubmit="localStorage.api=this.u.value.trim();API=localStorage.api.replace(/\\/+$/,'');boot();return false">${logo}<h1>Kết nối bot</h1><p>Dán link HTTPS công khai của bot (API).</p><input name=u placeholder="https://bot.tenmien.com" required><br><br><button class=btn>Lưu & tiếp tục</button></form></div>`;
+const loginView=()=>`<div class=hero><div class=card>${logo}<h1>Chubby Heo Way</h1><p>Quản lý server Discord bằng web — đăng nhập một chạm, không cần token.</p><a class=btn href="${API}/login">🔑 Đăng nhập bằng Discord</a><a class="btn ghost" href="${API}/invite">➕ Thêm bot & tự đăng nhập</a><p style="margin:16px 0 0;font-size:12px">Bot: <code>${esc(API)}</code> · <a href="#" onclick="localStorage.removeItem('api');API='';render();return false" style="text-decoration:underline">đổi</a></p></div></div>`;
+const gi=(g)=>g.icon?`<img src="${esc(g.icon)}" alt="">`:esc((g.name||'?')[0]);
+const serversView=()=>`<div class=app style="display:block"><div class=top><h2>Chọn server</h2><span><a class="btn ghost s" href="${API}/invite">➕ Thêm bot</a> <a class="btn ghost s" href="#" onclick="logout();return false">Đăng xuất</a></span></div><div class=grid>${S.me.guilds.map(g=>`<a class=card href="#/g/${g.id}"><div class=gh><div class=ico>${gi(g)}</div><div><b>${esc(g.name)}</b><br><span style="color:var(--mu);font-size:12px">${g.members} thành viên</span></div></div></a>`).join('')}${S.me.invitable.map(g=>`<div class=card style="opacity:.8"><div class=gh><div class=ico>${gi(g)}</div><b>${esc(g.name)}</b></div><a class="btn s" href="${API}/invite?guild_id=${g.id}">Thêm bot vào đây</a></div>`).join('')}</div></div>`;
+async function logout(){try{await api('/api/auth/logout',{})}catch(e){}localStorage.removeItem('tok');S.me=null;location.hash='';render()}
+const TABS=[['home','🏠','Tổng quan'],['mod','🛡️','Moderation'],['msg','💬','Tin nhắn & Embed'],['partner','🤝','Partner'],['welcome','👋','Welcome & Ticket','owner'],['sec','🔐','Bảo mật','admin'],['voice','🎧','Voice & Backup','admin'],['keys','🔑','License Key','owner'],['log','📜','Hoạt động & Ban'],['con','⌨️','Console']];
+const shell=c=>{const g=S.ov.guild,u=S.me.user;return`<div class=app><aside class=side><div class=gh><div class=ico>${gi(g)}</div><div><b>${esc(g.name)}</b><br><a href="#" style="color:var(--mu);font-size:12px">⇄ đổi server</a></div></div><nav class=nav>${TABS.filter(t=>!t[3]||S.ov.caps[t[3]]).map(t=>`<a href="#/g/${g.id}/${t[0]}" class="${S.tab===t[0]?'on':''}">${t[1]} ${t[2]}</a>`).join('')}</nav><div class=me>${u.avatar?`<img src="${esc(u.avatar)}" alt="">`:''}<span style="flex:1">${esc(u.name)}</span><a href="#" onclick="logout();return false" title="Đăng xuất">⏻</a></div></aside><main>${c}</main></div>`};
+
+/* ---------- các tab ---------- */
+const V={
+ home(){const g=S.ov.guild,b=S.ov.bot,t=(n,l)=>`<div class=tile><b>${n}</b><span>${l}</span></div>`;
+  return`<div class=top><h2>Tổng quan</h2><span class=bd>● Online ${b.ping??'–'} ms</span></div><div class=tiles>${t(g.members,'Thành viên')}${t(g.text,'Kênh chat')}${t(g.voice,'Kênh voice')}${t(g.roles,'Role')}${t(g.emojis,'Emoji')}${t(g.boosts+' (Lv'+g.tier+')','Boost')}</div>
+  <div class=grid><div class=card><h3>🤖 Bot</h3><div class=row>Uptime<b>${up(b.uptime)}</b></div><div class=row>Số server<b>${b.guilds}</b></div><div class=row>Tổng người dùng<b>${b.users}</b></div><div class=row>discord.py<b>${esc(b.py)}</b></div></div>
+  <div class=card><h3>⚡ Lối tắt</h3>${TABS.slice(1,5).map(t=>`<div class=row><a href="#/g/${g.id}/${t[0]}">${t[1]} ${t[2]}</a><span class=t>→</span></div>`).join('')}</div></div>`},
+ mod(){return`<div class=top><h2>Moderation</h2></div><div class=grid>${card('🔇 Mute','mute',[U('user_id','Thành viên'),T('duration','Thời gian (30m, 2h, 7d, 1h30m, 1nam)',{p:'30m'}),T('reason','Lý do')])}${card('🔊 Gỡ mute','unmute',[U('user_id','Thành viên')])}${card('👢 Kick','kick',[U('user_id','Thành viên'),T('reason','Lý do')])}${card('🔨 Ban','ban',[U('user_id','Thành viên hoặc ID'),T('reason','Lý do'),N('delete_days','Xóa tin nhắn (0–7 ngày)',0)])}${card('♻️ Gỡ ban','unban',[T('user_id','ID người dùng')])}${card('🧹 Dọn tin nhắn','purge',[CH('channel_id','Kênh'),N('amount','Số tin (1–500)',10)])}${card('🐢 Slowmode','slowmode',[CH('channel_id','Kênh'),N('seconds','Giây (0 = tắt)',5)])}${card('🔒 Khóa kênh','lock',[CH('channel_id','Kênh','x'),T('reason','Lý do')],'Khóa')}${card('🔓 Mở khóa kênh','unlock',[CH('channel_id','Kênh','x')],'Mở khóa')}${card('🎭 Role','role',[SE('op','Thao tác',[['add','Cấp role'],['remove','Gỡ role']]),U('user_id','Thành viên'),RL('role_id','Role')])}</div>`},
+ msg(){return`<div class=top><h2>Tin nhắn & Embed</h2></div><div class=grid>${card('💬 Gửi tin nhắn','say',[CH('channel_id','Kênh'),A('content','Nội dung'),B('pings','Cho phép @everyone/@role (cần quyền admin)')],'Gửi')}${card('🖼️ Gửi Embed','embed',[CH('channel_id','Kênh'),T('title','Tiêu đề'),A('description','Mô tả'),K('color','Màu'),T('image','Link ảnh lớn'),T('thumbnail','Link ảnh nhỏ'),T('footer','Footer'),B('pings','Kèm @everyone')],'Gửi embed')}${card('😀 Lấy emoji','steal',[T('emoji','Emoji (dạng <:tên:id>)'),T('name','Đặt tên mới (tùy chọn)')],'Thêm emoji')}</div>`},
+ async partner(){const d=await data('partner').catch(e=>({err:e.message,perms:{users:[],roles:[]},logs:[]})),o=S.ov.caps.owner;
+  return`<div class=top><h2>Partner</h2><span class=bd>Kênh: ${d.channel_name?'#'+esc(d.channel_name):esc(d.err||'chưa thấy')}</span></div><div class=grid>${card('📝 Đăng bài partner','partner_post',[U('rep_id','Người đại diện'),A('content','Nội dung bài'),B('tag_everyone','Tag @everyone')],'Gửi bài')}${card('🗑️ Xóa bài đã đăng','partner_delete',[T('message_id','ID tin nhắn')],'Xóa')}
+  ${o?card('📍 Kênh partner','partner_channel',[T('channel_id','ID kênh',{v:d.channel_id})],'Lưu')+card('🔑 Quyền dùng partner','partner_perm',[SE('kind','Loại',[['user','Người dùng'],['role','Role']]),SE('op','Thao tác',[['add','Thêm'],['remove','Thu hồi']]),T('id','ID')],'Áp dụng'):''}
+  ${list('✅ Được phép',[...d.perms.users.map(u=>`<div class=row>👤 ${esc(u.name)}<span class=t>${u.id}</span></div>`),...d.perms.roles.map(r=>`<div class=row>🎭 ${esc(r.name)}<span class=t>${r.id}</span></div>`)])}
+  ${list('📜 Lịch sử',d.logs.map(l=>`<div class=row><span>${l.action==='post'?'📤':'🗑️'} ${esc(l.content)}<br><span class=t>${esc(l.time)} · ${l.user_id}${l.message_id?' · '+l.message_id:''}</span></span></div>`))}</div>`},
+ async welcome(){const w=(await data('welcome')).cfg;return`<div class=top><h2>Welcome & Ticket</h2><span class="bd ${w.enabled?'':'x'}">${w.enabled?'Đang bật':'Đang tắt'}</span></div><div class=grid>${card('👋 Cấu hình welcome','welcome_set',[CH('channel_id','Kênh'),A('message','Nội dung ({user} {name} {server} {count})'),T('image_url','Link ảnh (tùy chọn)',{v:w.image_url}),B('enabled','Bật welcome',1)],'Lưu')}${card('🧪 Gửi thử','welcome_test',[],'Gửi thử welcome')}${card('⛔ Tắt welcome','welcome_off',[],'Tắt')}${card('🎫 Panel ticket','ticket_panel',[CH('channel_id','Kênh gửi panel')],'Gửi panel')}</div>`},
+ async sec(){const j=await data('security'),c=j.cfg,g=(p)=>p.split('.').reduce((o,k)=>o?.[k],c);
+  const R=(p,l,t,o)=>{const v=g(p);return`<div class=sw><span>${l}</span>${t==='b'?`<input type=checkbox data-sec="${p}" ${v?'checked':''}>`:t==='s'?`<select data-sec="${p}">${o.map(x=>`<option value="${x[0]}" ${x[0]===v?'selected':''}>${x[1]}</option>`).join('')}</select>`:t==='l'?`<input data-sec="${p}" data-l=1 value="${esc((v||[]).join(', '))}">`:`<input type=number min=1 data-sec="${p}" value="${v}">`}</div>`};
+  const mods=Object.entries(j.modules).map(([k,l])=>R(`nuke.modules.${k}.on`,'🛡️ '+l,'b')+(j.counted.includes(k)?R(`nuke.modules.${k}.limit`,'&nbsp;&nbsp;↳ Ngưỡng','n')+R(`nuke.modules.${k}.window`,'&nbsp;&nbsp;↳ Trong (giây)','n'):'')).join('');
+  return`<div class=top><h2>Bảo mật</h2><span class="bd ${j.an.enabled?'':'x'}">Anti-nuke ${j.an.enabled?'bật':'tắt'}</span></div><div class=grid>
+  <div class=card><h3>🔗 Anti-link</h3>${R('antilink.on','Bật','b')}${R('antilink.mode','Chế độ','s',[['all','Mọi link'],['invite','Chỉ invite']])}${R('antilink.action','Hành động','s',[['delete','Xóa tin'],['timeout','Xóa + timeout']])}${R('antilink.strikes','Số lần vi phạm','n')}${R('antilink.timeout_min','Timeout (phút)','n')}${R('antilink.domains','Domain cho phép','l')}</div>
+  <div class=card><h3>🚫 Anti-spam</h3>${R('antispam.on','Bật','b')}${R('antispam.rate.limit','Tin tối đa','n')}${R('antispam.rate.window','Trong (giây)','n')}${R('antispam.dupe.limit','Tin trùng tối đa','n')}${R('antispam.dupe.window','Trong (giây)','n')}${R('antispam.mentions','Mention tối đa','n')}${R('antispam.timeout_min','Timeout (phút)','n')}</div>
+  <div class=card><h3>☢️ Anti-nuke</h3>${R('nuke.punish','Hình phạt','s',[['timeout','Timeout'],['kick','Kick'],['ban','Ban']])}${R('nuke.timeout_days','Ngày timeout','n')}${mods}</div>
+  ${card('🛡️ Bật/tắt anti-nuke','antinuke_global',[SE('value','Trạng thái',[[true,'Bật'],[false,'Tắt']])],'Áp dụng',{op:'enabled'})}${card('➕ Whitelist thêm','antinuke_global',[T('user_id','ID người dùng')],'Thêm',{op:'wl_add'})}${card('➖ Whitelist xóa','antinuke_global',[T('user_id','ID người dùng')],'Xóa',{op:'wl_remove'})}${card('📣 Kênh log anti-nuke','antinuke_global',[CH('channel_id','Kênh')],'Lưu',{op:'log'})}
+  ${list('✅ Whitelist hiện tại',(j.legacy.whitelist||[]).map(i=>`<div class=row>👤 <span class=t>${i}</span></div>`))}</div>`},
+ async voice(){const t=(await data('tempvoice')).cfg;return`<div class=top><h2>Voice & Backup</h2></div><div class=grid>${card('🎧 Setup TempVoice','tempvoice_setup',[CH('join_channel_id','Kênh voice chờ (tạo phòng)','v',1),CH('interface_channel_id','Kênh gửi bảng điều khiển','t',1)],'Setup')}${card('💾 Backup server','backup',[],'Tạo backup ngay')}<div class=card><h3>ℹ️ Hiện tại</h3><div class=row>Kênh chờ<span class=t>${t.join_channel_id||'—'}</span></div><div class=row>Interface<span class=t>${t.interface_channel_id||'—'}</span></div></div></div>`},
+ async keys(){const j=await data('keys');return`<div class=top><h2>License Key</h2><span class=bd>${j.keys.length} key</span></div><div class=grid>${card('➕ Tạo key','key_create',[N('quantity','Số lượng',1),N('amount','Thời hạn',30),SE('unit','Đơn vị',[['ngay','Ngày'],['tuan','Tuần'],['thang','Tháng'],['nam','Năm'],['vinhvien','Vĩnh viễn']]),N('devices','Số máy',1)],'Tạo key')}</div><br>${list('🔑 Danh sách',j.keys.map(k=>`<div class=row><span><code data-copy="${esc(k.key)}" style="cursor:pointer">${esc(k.key)}</code><br><span class=t>${esc(k.expire)} · máy ${k.used}/${k.max}</span></span><span><span class="bd ${k.alive?'':'x'}">${k.alive?'Sống':'Hết hạn'}</span> <button class="btn red s" data-delkey="${esc(k.key)}">Xóa</button></span></div>`))}`},
+ async log(){const [a,b]=await Promise.all([data('activity'),data('bans').catch(e=>({err:e.message,bans:[]}))]);
+  return`<div class=top><h2>Hoạt động & Ban</h2></div><div class=grid>${list('📜 Nhật ký',a.logs.map(l=>`<div class=row><span>${l.source==='web'?'🌐':'💬'} <b>${esc(l.actor)}</b> — ${esc(l.text)}</span><span class=t>${dt(l.t)}</span></div>`),'Chưa có hoạt động')}${list('🔨 Danh sách ban'+(b.err?' ('+esc(b.err)+')':''),b.bans.map(x=>`<div class=row><span>${esc(x.name)}<br><span class=t>${x.id}${x.reason?' · '+esc(x.reason):''}</span></span><button class="btn s" data-unban="${x.id}">Gỡ ban</button></div>`),'Không có ai bị ban')}</div>`},
+ con(){return`<div class=top><h2>Console</h2><span class=t style="color:var(--mu)">gõ <b>help</b> để xem lệnh</span></div><div class=card><div class=term id=term><div class=c>Chubby Heo Way Console — dùng lệnh như trên Discord.</div></div><form id=cf style="display:flex;gap:8px;margin-top:10px"><input id=ci placeholder="mute @user 30m spam  ·  lock #chat  ·  purge 20 #chat" autocomplete=off><button class=btn>Chạy</button></form></div>`}};
+
+/* ---------- console ---------- */
+const HELP=`lock #kênh [lý do] · unlock #kênh\nmute <user> <30m|2h|7d> [lý do] · unmute <user>\nkick <user> [lý do] · ban <user> [lý do] · unban <id>\npurge <số> #kênh · slowmode <giây> #kênh\nrole add|remove <user> <tên role>\nsay #kênh <nội dung>`;
+async function run(line){const a=line.trim().split(/\s+/),c=(a.shift()||'').replace(/^[?\/]/,'').toLowerCase(),rest=n=>a.slice(n).join(' ');
+ const ch=s=>{const k=(s||'').replace(/[<#>]/g,'').toLowerCase(),x=S.ov.channels.find(z=>z.id==k||z.name.toLowerCase()==k);if(!x)throw Error('Không thấy kênh '+s);return x.id};
+ switch(c){case'help':return HELP;case'lock':case'unlock':return(await act({action:c,channel_id:ch(a[0]),reason:rest(1)})).message;
+ case'mute':return(await act({action:c,user_id:await uid(a[0]||''),duration:a[1],reason:rest(2)})).message;
+ case'unmute':return(await act({action:c,user_id:await uid(a[0]||'')})).message;
+ case'kick':case'ban':return(await act({action:c,user_id:await uid(a[0]||''),reason:rest(1)})).message;
+ case'unban':return(await act({action:c,user_id:a[0]})).message;
+ case'purge':return(await act({action:c,amount:+a[0],channel_id:ch(a[1])})).message;
+ case'slowmode':return(await act({action:c,seconds:+a[0],channel_id:ch(a[1])})).message;
+ case'say':return(await act({action:c,channel_id:ch(a[0]),content:rest(1)})).message;
+ case'role':{const n=rest(2).toLowerCase(),r=S.ov.roles.find(x=>x.name.toLowerCase()==n)||S.ov.roles.find(x=>x.name.toLowerCase().includes(n));if(!r)throw Error('Không thấy role');return(await act({action:'role',op:a[0],user_id:await uid(a[1]||''),role_id:r.id})).message}
+ default:throw Error('Lệnh không tồn tại. Gõ help.')}}
+document.addEventListener('submit',async e=>{if(e.target.id!=='cf')return;e.preventDefault();const i=$('#ci'),t=$('#term'),l=i.value.trim();if(!l)return;i.value='';t.innerHTML+=`<div class=c>› ${esc(l)}</div>`;
+ try{t.innerHTML+=`<div class=o>${esc(await run(l)).replace(/\n/g,'<br>')}</div>`}catch(x){t.innerHTML+=`<div class=e>✗ ${esc(x.message)}</div>`}t.scrollTop=1e9});
+document.addEventListener('click',async e=>{const t=e.target;
+ if(t.dataset.unban){try{toast((await act({action:'unban',user_id:t.dataset.unban})).message);render()}catch(x){toast(x.message,1)}}
+ if(t.dataset.delkey&&confirm('Xóa key này?')){try{toast((await act({action:'key_delete',keys:[t.dataset.delkey]})).message);render()}catch(x){toast(x.message,1)}}
+ if(t.dataset.copy){navigator.clipboard?.writeText(t.dataset.copy);toast('Đã copy key')}});
+document.addEventListener('change',async e=>{const t=e.target,p=t.dataset.sec;if(!p)return;let v=t.type==='checkbox'?t.checked:t.type==='number'?+t.value:t.dataset.l?t.value.split(',').map(s=>s.trim()).filter(Boolean):t.value;
+ try{toast((await act({action:'security_set',path:p,value:v})).message)}catch(x){toast(x.message,1);render()}});
+
+/* ---------- định tuyến ---------- */
+async function render(){const r=$('#root');
+ if(!API){r.innerHTML=connectView();return}if(!S.me){r.innerHTML=loginView();return}if(!S.gid){r.innerHTML=serversView();return}
+ if(!S.ov||S.ov.guild.id!=S.gid){r.innerHTML='<div class=hero>Đang tải…</div>';try{S.ov=await api(`/api/guild/${S.gid}/overview`)}catch(e){toast(e.message,1);location.hash='';return}}
+ if(!V[S.tab])S.tab='home';const tab=TABS.find(t=>t[0]===S.tab);if(tab&&tab[3]&&!S.ov.caps[tab[3]]){S.tab='home'}
+ let h;try{h=await V[S.tab]()}catch(e){h=`<div class=card><h3>⚠️ Không tải được</h3>${esc(e.message)}</div>`}r.innerHTML=shell(h)}
+function route(){const m=location.hash.match(/^#\/g\/(\d+)(?:\/(\w+))?/);if(!m||m[1]!=S.gid)S.ov=null;S.gid=m?m[1]:null;S.tab=m&&m[2]||'home';render()}
+async function boot(){const h=new URLSearchParams(location.hash.slice(1));
+ if(API&&h.get('ticket')){try{localStorage.tok=(await api('/api/auth/ticket',{ticket:h.get('ticket')})).token}catch(e){toast(e.message,1)}const g=h.get('guild');history.replaceState(null,'',location.pathname+(g?'#/g/'+g:''))}
+ if(API&&localStorage.tok){try{S.me=await api('/api/me')}catch(e){}}route()}
+addEventListener('hashchange',route);boot();
+</script></body></html>
